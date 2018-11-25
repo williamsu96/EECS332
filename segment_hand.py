@@ -2,13 +2,14 @@ import cv2 #import OpenCV
 import matplotlib
 # matplotlib.use("TkAgg")
 import numpy
+import copy
 from matplotlib import pyplot as plt
 
 def segment_hand():
     # plt.switch_backend('QT4agg')
 
     img = cv2.imread('finger.png')
-    img_out = img[:]
+    img_out = copy.deepcopy(img)
     img_gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
     img_hsv = cv2.cvtColor(img, cv2.COLOR_RGB2HSV)
     # # Displaying original image
