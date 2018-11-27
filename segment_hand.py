@@ -8,7 +8,7 @@ from matplotlib import pyplot as plt
 def segment_hand():
     # plt.switch_backend('QT4agg')
 
-    img = cv2.imread('finger.png')
+    img = cv2.imread('input_frames/finger.png')
     img_out = copy.deepcopy(img)
 
     img_gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
