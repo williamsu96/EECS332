@@ -10,7 +10,6 @@ if __name__ == "__main__":
     webcam = cv2.VideoCapture(0)
     while True:
         ret_val, img = webcam.read()
-        cv2.imshow('webcam', img)
 
         segmented_img = segment_hand.segment_hand(histogram,
                                                   img)  # TODO: takes histogram and current webcam img and returns segmented output
@@ -19,6 +18,9 @@ if __name__ == "__main__":
 
         # TODO: function that stores fingertip positions and draws each one onto img
 
-        if cv2.waitKey(0):
+        # cv2.imshow('webcam', img)
+        cv2.imshow('webcam', segmented_img)
+        if cv2.waitKey(1)==32:
+            cv2.imwrite('hand.jpg', segmented_img)
             break
     cv2.destroyAllWindows()

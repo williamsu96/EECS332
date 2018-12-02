@@ -12,7 +12,7 @@ def histogram(img):  # takes in the picture from the webcam stream and returns i
     box_rows = int(rows / 10 / 2)
     box_cols = int(cols / 10 / 2)
     rect_centers = numpy.array(
-        [[rows / 3, cols / 3], [rows * 2 / 3, cols / 3], [rows / 3, cols * 2 / 3], [rows * 2 / 3, cols * 2 / 3]])
+        [[rows / 3, cols * 2 / 5], [rows * 2 / 3, cols * 2 / 5], [rows / 3, cols * 3 / 5], [rows * 2 / 3, cols * 3 / 5]])
     sub_img = [0] * 4
     for i in range(0, 4):
         x = int(numpy.round(rect_centers[i, 0]))
@@ -42,8 +42,10 @@ def generate_histogram_from_webcam():
         cols = img.shape[1]
         box_rows = int(rows / 10 / 2)
         box_cols = int(cols / 10 / 2)
+        # rect_centers = numpy.array(
+        #     [[rows / 3, cols / 3], [rows * 2 / 3, cols / 3], [rows / 3, cols * 2 / 3], [rows * 2 / 3, cols * 2 / 3]])
         rect_centers = numpy.array(
-            [[rows / 3, cols / 3], [rows * 2 / 3, cols / 3], [rows / 3, cols * 2 / 3], [rows * 2 / 3, cols * 2 / 3]])
+            [[rows / 3, cols * 2 / 5], [rows * 2 / 3, cols * 2 / 5], [rows / 3, cols * 3 / 5], [rows * 2 / 3, cols * 3 / 5]])
         for i in range(0, 4):
             x = int(numpy.round(rect_centers[i, 0]))
             y = int(numpy.round(rect_centers[i, 1]))
