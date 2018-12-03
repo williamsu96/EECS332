@@ -2,6 +2,32 @@ import cv2
 import numpy as np
 from scipy.spatial import distance
 
+def noise_filter_CCL(seg_img, connectivity, mask_threshold):
+    seg_img_gray = cv2.cvtColor(seg_img, cv2.COLOR_BGR2GRAY)
+    output = cv2.connectedComponentsWithStats(seg_img_gray, connectivity, cv2.CV_32S)
+    labels = output[1]
+    stats = output[2]
+    delete_list = []
+    for i in range(0, stats.shape[0]):
+        if stats[i,4] < mask_threshold:
+            delete_list.append(i)
+
+    for i in delete_list:
+        labels[labels == i] = 0
+
+    labels[labels != 0] = 1
+    # for i in range(3):
+    #     labels[:, :, i] = labels.copy()
+    mask = labels.astype(np.uint8)
+    ret_ccl = cv2.bitwise_and(seg_img, seg_img, mask = mask)
+
+    # while(1):
+    #     cv2.imshow('ccl', ret_ccl)
+    #     if cv2.waitKey(1) == 32:
+    #         break
+    return ret_ccl
+
+
 def max_contour(contours):
     # Iterates through a list of contours and return an index with the largest number of vertices (longest contour)
     max_contour_index = 0
