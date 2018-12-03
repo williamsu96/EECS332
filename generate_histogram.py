@@ -6,7 +6,7 @@ from matplotlib import pyplot as plt
 
 def histogram(img):  # takes in the picture from the webcam stream and returns its histogram
     img_out = copy.deepcopy(img)
-    img_hsv = cv2.cvtColor(img, cv2.COLOR_RGB2HSV)
+    img_hsv = cv2.cvtColor(img, cv2.COLOR_RGB2YCrCb)
     rows = img.shape[0]
     cols = img.shape[1]
     box_rows = int(rows / 10 / 3)
@@ -22,7 +22,7 @@ def histogram(img):  # takes in the picture from the webcam stream and returns i
         cv2.rectangle(img_out, (y - box_rows, x - box_cols), (y + box_rows, x + box_cols), (255, 0, 0),
                       1)  # drawing squares
 
-    hist_ = cv2.calcHist([sub_img[0], sub_img[1], sub_img[2], sub_img[3], sub_img[4]], [0, 1], None, [180, 256], [0, 180, 0, 256])
+    hist_ = cv2.calcHist([sub_img[0], sub_img[1], sub_img[2], sub_img[3], sub_img[4]], [1, 2], None, [50, 50], [0, 180, 0, 256])
 
     # cv2.imshow('webcam', img_out)
     # cv2.waitKey(0)
