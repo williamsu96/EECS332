@@ -9,19 +9,20 @@ def histogram(img):  # takes in the picture from the webcam stream and returns i
     img_hsv = cv2.cvtColor(img, cv2.COLOR_RGB2HSV)
     rows = img.shape[0]
     cols = img.shape[1]
-    box_rows = int(rows / 10 / 2)
-    box_cols = int(cols / 10 / 2)
+    box_rows = int(rows / 10 / 3)
+    box_cols = int(cols / 10 / 3)
     rect_centers = numpy.array(
-        [[rows / 3, cols * 2 / 5], [rows * 2 / 3, cols * 2 / 5], [rows / 3, cols * 3 / 5], [rows * 2 / 3, cols * 3 / 5]])
-    sub_img = [0] * 4
-    for i in range(0, 4):
+        [[rows /2, cols / 2], [rows * 2 / 5, cols * 3 / 7], [rows * 3 / 5, cols * 3 / 7], [rows * 2 / 5, cols * 4 / 7],
+         [rows * 3 / 5, cols * 4 / 7]])
+    sub_img = [0] * 5
+    for i in range(len(rect_centers)):
         x = int(numpy.round(rect_centers[i, 0]))
         y = int(numpy.round(rect_centers[i, 1]))
         sub_img[i] = img_hsv[(y - box_rows):(y + box_rows), (x - box_cols):(x + box_cols), :]
         cv2.rectangle(img_out, (y - box_rows, x - box_cols), (y + box_rows, x + box_cols), (255, 0, 0),
                       1)  # drawing squares
 
-    hist_ = cv2.calcHist([sub_img[0], sub_img[1], sub_img[2], sub_img[3]], [1, 2], None, [10, 10], [0, 256, 0, 256])
+    hist_ = cv2.calcHist([sub_img[0], sub_img[1], sub_img[2], sub_img[3], sub_img[4]], [0, 1], None, [180, 256], [0, 180, 0, 256])
 
     cv2.imshow('webcam', img_out)
     cv2.waitKey(0)
@@ -40,17 +41,20 @@ def generate_histogram_from_webcam():
         ret_val, img = webcam.read()
         rows = img.shape[0]
         cols = img.shape[1]
-        box_rows = int(rows / 10 / 2)
-        box_cols = int(cols / 10 / 2)
+        box_rows = int(rows / 10 / 3)
+        box_cols = int(cols / 10 / 3)
         # rect_centers = numpy.array(
         #     [[rows / 3, cols / 3], [rows * 2 / 3, cols / 3], [rows / 3, cols * 2 / 3], [rows * 2 / 3, cols * 2 / 3]])
+
         rect_centers = numpy.array(
-            [[rows / 3, cols * 2 / 5], [rows * 2 / 3, cols * 2 / 5], [rows / 3, cols * 3 / 5], [rows * 2 / 3, cols * 3 / 5]])
-        for i in range(0, 4):
+            [[rows / 2, cols / 2], [rows * 2 / 5, cols * 3 / 7], [rows * 3 / 5, cols * 3 / 7],
+             [rows * 2 / 5, cols * 4 / 7],
+             [rows * 3 / 5, cols * 4 / 7]])
+
+        for i in range(len(rect_centers)):
             x = int(numpy.round(rect_centers[i, 0]))
             y = int(numpy.round(rect_centers[i, 1]))
-            cv2.rectangle(img, (y - box_rows, x - box_cols), (y + box_rows, x + box_cols), (255, 0, 0),
-                          1)  # drawing squares
+            cv2.rectangle(img, (y - box_rows, x - box_cols), (y + box_rows, x + box_cols), (255, 0, 0), 1)  # drawing squares
         cv2.imshow('webcam', img)
 
         if cv2.waitKey(1) == 32:  # space
