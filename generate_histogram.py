@@ -12,7 +12,7 @@ def histogram(img):  # takes in the picture from the webcam stream and returns i
     box_rows = int(rows / 10 / 3)
     box_cols = int(cols / 10 / 3)
     rect_centers = numpy.array(
-        [[rows /2, cols / 2], [rows * 2 / 5, cols * 3 / 7], [rows * 3 / 5, cols * 3 / 7], [rows * 2 / 5, cols * 4 / 7],
+        [[rows / 2, cols / 2], [rows * 2 / 5, cols * 3 / 7], [rows * 3 / 5, cols * 3 / 7], [rows * 2 / 5, cols * 4 / 7],
          [rows * 3 / 5, cols * 4 / 7]])
     sub_img = [0] * 5
     for i in range(len(rect_centers)):
@@ -28,7 +28,7 @@ def histogram(img):  # takes in the picture from the webcam stream and returns i
     cv2.waitKey(0)
     # uncomment to imshow histogram
     # plt.imshow(hist_)
-    # plt.show()]
+    # plt.show()
     return hist_
 
     # plt.show()
