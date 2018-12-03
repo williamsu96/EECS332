@@ -15,3 +15,5 @@ def segment_hand(histogram, img):
     thresh = cv2.merge((thresh, thresh, thresh))
     return cv2.bitwise_and(img, thresh)
 
+
+
