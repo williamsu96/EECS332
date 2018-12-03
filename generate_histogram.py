@@ -24,8 +24,8 @@ def histogram(img):  # takes in the picture from the webcam stream and returns i
 
     hist_ = cv2.calcHist([sub_img[0], sub_img[1], sub_img[2], sub_img[3], sub_img[4]], [0, 1], None, [180, 256], [0, 180, 0, 256])
 
-    cv2.imshow('webcam', img_out)
-    cv2.waitKey(0)
+    # cv2.imshow('webcam', img_out)
+    # cv2.waitKey(0)
     # uncomment to imshow histogram
     # plt.imshow(hist_)
     # plt.show()

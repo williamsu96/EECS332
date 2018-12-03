@@ -13,6 +13,7 @@ if __name__ == "__main__":
     webcam = cv2.VideoCapture(0)
     while True:
         ret_val, img = webcam.read()
+        # img = cv2.resize(img, (0,0), fx=0.5, fy=0.25)
 
         # Performs image segmentation via histogram generation
         segmented_img = segment_hand.segment_hand(histogram, img)
@@ -28,7 +29,7 @@ if __name__ == "__main__":
             draw_points.remove(draw_points[0])
         for i in range(len(draw_points)):
             cv2.circle(img, draw_points[i], point_radius, (0, 0, 255), -1)
-        cv2.imshow('output', img)
+        # cv2.imshow('output', img)
         cv2.imshow('seg', segmented_img)
         if cv2.waitKey(1) == 32:
             break
