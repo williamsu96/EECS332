@@ -9,7 +9,7 @@ if __name__ == "__main__":
     histogram = generate_histogram.generate_histogram_from_webcam()
     draw_points = []
     draw_length = 100
-    point_radius = 20
+    point_radius = 3
     webcam = cv2.VideoCapture(0)
     while True:
         ret_val, img = webcam.read()
